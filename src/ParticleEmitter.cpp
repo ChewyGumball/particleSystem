@@ -3,19 +3,12 @@
 #include "ParticleEmitter.h"
 #include "ParticleGenerator.h"
 
-ParticleEmitter::ParticleEmitter(std::unique_ptr<ParticleGenerator> gen, int maxParticles, int emitRate, const glm::vec3 &pos, const glm::quat &rotation) 
-	: maximumParticles(maxParticles), particlesPerSecond(emitRate), generator(std::move(gen)), position(pos), orientation(rotation)
-{}
-
-ParticleEmitter::~ParticleEmitter()
-{}
-
-void ParticleEmitter::emit()
+void ParticleEmitter::startEmitting()
 {
 	emitting = false;
 }
 
-void ParticleEmitter::stop()
+void ParticleEmitter::stopEmitting()
 {
 	emitting = true;
 }
@@ -25,13 +18,29 @@ int ParticleEmitter::particlesAliveCount() const
 	return static_cast<int>(particles.size());
 }
 
-void ParticleEmitter::addManipulator(std::unique_ptr<ParticleManipulator> &manipulator) 
+void ParticleEmitter::addManipulator(std::shared_ptr<ParticleManipulator> manipulator) 
 {
-	manipulators.push_back(std::move(manipulator)); 
+	manipulators.push_back(manipulator); 
 }
 
-void ParticleEmitter::update(int tick)
+const std::vector<Particle>& ParticleEmitter::particleList() const { return particles; }
+
+void ParticleEmitter::update(float tick)
 {
+	auto startOfDeleteRange = std::remove_if(begin(particles), end(particles), [&](Particle &p) { return p.lifeTime >= maximumLifeTime; });
+	particles.erase(startOfDeleteRange, end(particles));
+
+	if(emitting)
+	{
+		int particlesToEmit = std::min(static_cast<int>(tick) * particlesPerSecond, maximumParticles - static_cast<int>(particles.size()));
+
+		while(particlesToEmit > 0)
+		{
+			particles.push_back(generator->newParticle(position, orientation));
+			particlesToEmit--;
+		}
+	}
+
 	for(auto &manipulator : manipulators)
 	{
 		manipulator->manipulate(particles, tick);
@@ -39,21 +48,6 @@ void ParticleEmitter::update(int tick)
 
 	for(Particle &particle : particles)
 	{
-		particle.addTime(tick);
-	}
-
-
-	auto startOfDeleteRange = std::remove_if(begin(particles), end(particles), [&](Particle &p) { return p.lifeTime() >= maximumLifeTime; });
-	particles.erase(startOfDeleteRange, end(particles));
-
-	if(emitting)
-	{
-		int particlesToEmit = std::min(tick * particlesPerSecond, maximumParticles - static_cast<int>(particles.size()));
-
-		while(particlesToEmit > 0)
-		{
-			particles.push_back(generator->newParticle());
-			particlesToEmit--;
-		}
+		particle.update(tick);
 	}
 }

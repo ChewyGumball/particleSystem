@@ -8,16 +8,19 @@
 class ParticleSystem
 {
 private:
-	glm::vec4 position;
-
-	std::vector<ParticleEmitter> emitters;
+	std::vector<ParticleEmitter*> emitters;
 
 public:
 
-	ParticleSystem();
-	~ParticleSystem();
+	ParticleSystem() {}
+	~ParticleSystem() {}
 
 	ParticleSystem(ParticleSystem &other);
 	ParticleSystem(ParticleSystem &&other);
 	ParticleSystem& operator=(ParticleSystem rhs);
+
+	void addEmitter(ParticleEmitter *emitter);
+
+	void update(float tick);
+	const std::vector<Particle> particles() const;
 };

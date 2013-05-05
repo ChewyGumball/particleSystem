@@ -7,9 +7,8 @@
 class ParticleManipulator
 {
 public:
-	ParticleManipulator();
-	virtual ~ParticleManipulator();
+	virtual ~ParticleManipulator() {}
 
-	virtual void manipulate(std::vector<Particle> &particles, int tick) = 0;
+	virtual void manipulate(std::vector<Particle> &particles, float tick) = 0;
 };
 

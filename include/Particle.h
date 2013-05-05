@@ -2,45 +2,35 @@
 
 #include <glm/glm.hpp>
 
-class Particle
+struct  Particle
 {
-private:
+	unsigned int label;
 
-	int _lifeTime;
-
-	float _opacity;
-
-	float _rotation;
-	float _angularVelocity;
+	float lifeTime;
 	
-	glm::vec2 _scale;
+	float opacity;
+	float rotation;
+	float angularVelocity;
 
-	glm::vec3 _position;
-	glm::vec3 _velocity;
-
-public:
+	glm::vec2 scale;
 	
-	Particle(const glm::vec3 &position, const glm::vec3 &velocity, float rotation = 0.0f, float angularVelocity = 0.0f);
-	~Particle();
-	
-	int lifeTime() const;
-	void addTime(int time);
+	glm::vec3 position;
+	glm::vec3 velocity;
 
-	const glm::vec3& position() const;
-	void position(const glm::vec3& pos);
+	Particle(unsigned int label, const glm::vec3 &position, const glm::vec3 &velocity, float rotation = 0.0f, float angularVelocity = 0.0f, const glm::vec2 &scale = glm::vec2(1,1), float opacity = 1.0)
+		:  label(label), lifeTime(0.0), opacity(opacity), rotation(rotation), angularVelocity(angularVelocity), scale(scale), position(position), velocity(velocity)
+	{}
+	/* Convenience constructors for different combinations of parameters - would use constructor delegation if compiler supported it
 
-	const glm::vec3& velocity() const;
-	void  velocity(glm::vec3& vel);
+	Particle(const glm::vec3 &position, const glm::vec3 &velocity, float rotation, float angularVelocity, float opacity);
+	Particle(const glm::vec3 &position, const glm::vec3 &velocity, const glm::vec2 &scale, float opacity);
+	Particle(const glm::vec3 &position, const glm::vec3 &velocity, const glm::vec2 &scale);
+	Particle(const glm::vec3 &position, const glm::vec3 &velocity, float opacity);
+	//*/
 
-	const glm::vec2& scale() const;
-	void scale(glm::vec2& sc);
+	~Particle() {}
 
-	float opacity() const;
-	void opacity(float op);
 
-	float rotation() const;
-	void rotation(float rot);
-	
-	float angularVelocity() const;
-	void angularVelocity(float vel);
+
+	void update(float tick);
 };

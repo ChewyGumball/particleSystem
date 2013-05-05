@@ -2,11 +2,10 @@
 
 #include "Particle.h"
 
-class ParticleGenerator
+class  ParticleGenerator
 {
 public:
-	ParticleGenerator();
-	virtual ~ParticleGenerator();
+	virtual ~ParticleGenerator() {}
 
-	virtual Particle newParticle() = 0;
+	virtual Particle newParticle(glm::vec3 &emmitterPosition, glm::quat &emmitterOrientation) = 0;
 };
