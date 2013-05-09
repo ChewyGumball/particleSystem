@@ -19,6 +19,7 @@ void ParticleSystem::update(float tick)
 
 const std::vector<Particle> ParticleSystem::particles() const
 {
+
 	std::vector<Particle> collectedParticles;
 
 	for(const ParticleEmitter* const emitter: emitters)

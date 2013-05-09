@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 
 #include "ParticleEmitter.h"
 #include "ParticleGenerator.h"
@@ -29,16 +30,13 @@ void ParticleEmitter::update(float tick)
 {
 	auto startOfDeleteRange = std::remove_if(begin(particles), end(particles), [&](Particle &p) { return p.lifeTime >= maximumLifeTime; });
 	particles.erase(startOfDeleteRange, end(particles));
+	
+	timeSinceLastEmit += tick;
 
-	if(emitting)
+	if(emitting && particles.size() < maximumParticles && timeSinceLastEmit >= secondsPerParticle)
 	{
-		int particlesToEmit = std::min(static_cast<int>(tick) * particlesPerSecond, maximumParticles - static_cast<int>(particles.size()));
-
-		while(particlesToEmit > 0)
-		{
-			particles.push_back(generator->newParticle(position, orientation));
-			particlesToEmit--;
-		}
+		particles.push_back(generator->newParticle(position, orientation));
+		timeSinceLastEmit = 0.0f;
 	}
 
 	for(auto &manipulator : manipulators)

@@ -15,8 +15,10 @@ class ParticleEmitter
 private:
 	bool emitting;
 	int maximumParticles;
-	int particlesPerSecond;
+	float secondsPerParticle;
 	int maximumLifeTime;
+
+	float timeSinceLastEmit;
 
 	std::vector<Particle> particles;
 	std::vector<std::shared_ptr<ParticleManipulator>> manipulators;
@@ -31,7 +33,7 @@ private:
 public:
 
 	ParticleEmitter(std::unique_ptr<ParticleGenerator> gen, int maxParticles, int emitRate, const glm::vec3 &pos = glm::vec3(), const glm::quat &orient = glm::quat())
-		: emitting(true), maximumParticles(maxParticles), particlesPerSecond(emitRate), generator(std::move(gen)), position(pos), orientation(orient)
+		: emitting(true), maximumParticles(maxParticles), secondsPerParticle(1.0f/static_cast<float>(emitRate)), maximumLifeTime(4), timeSinceLastEmit(0.0f), generator(std::move(gen)), position(pos), orientation(orient)
 	{}
 	virtual ~ParticleEmitter() {}
 
