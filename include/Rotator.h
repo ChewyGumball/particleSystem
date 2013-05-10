@@ -4,7 +4,7 @@
 
 #include "ParticleManipulator.h"
 
-class  Rotator : public ParticleManipulator
+class Rotator : public ParticleManipulator
 {	
 private:
 	const float angularAcceleration;

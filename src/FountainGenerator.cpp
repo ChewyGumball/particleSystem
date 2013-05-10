@@ -8,12 +8,14 @@
 
 namespace
 {
+
+	//rand needs to be seeded, but only once
 	bool initialized;
 	void seedRandom()
 	{
 		if(!initialized)
 		{
-			srand(time(0));
+			srand(time(nullptr));
 			initialized = true;
 		}
 	}
@@ -38,6 +40,7 @@ namespace
 }
 FountainGenerator::FountainGenerator(float fountainAngle, glm::vec3 &pos, glm::vec3 &dir) : position(pos), direction(dir), deviation(fountainAngle) 
 {
+	//make sure the random is seeded
 	seedRandom();
 }
 Particle FountainGenerator::newParticle(glm::vec3 &emmitterPosition, glm::quat &emmitterOrientation)
