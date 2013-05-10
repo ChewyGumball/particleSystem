@@ -17,7 +17,7 @@ struct  Particle
 	glm::vec3 position;
 	glm::vec3 velocity;
 
-	Particle(unsigned int label, const glm::vec3 &position, const glm::vec3 &velocity, float rotation = 0.0f, float angularVelocity = 0.0f, const glm::vec2 &scale = glm::vec2(1,1), float opacity = 1.0)
+	Particle(unsigned int label, const glm::vec3 &position, const glm::vec3 &velocity, float rotation = 0.0f, float angularVelocity = 0.0f, const glm::vec2 &scale = glm::vec2(1.0f,1.0f), float opacity = 1.0f)
 		:  label(label), lifeTime(0.0), opacity(opacity), rotation(rotation), angularVelocity(angularVelocity), scale(scale), position(position), velocity(velocity)
 	{}
 	/* Convenience constructors for different combinations of parameters - would use constructor delegation if compiler supported it

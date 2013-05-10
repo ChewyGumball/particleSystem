@@ -8,10 +8,10 @@ class  Rotator : public ParticleManipulator
 {	
 private:
 	const float angularAcceleration;
-	const std::function<float(float,float,float)> fadeFunction;
+	const std::function<float(float,Particle&,float)> fadeFunction;
 
 public:
-	explicit Rotator(float angularAccel, const std::function<float(float,float,float)> &fader = [](float maximumLife, float currentLife, float baseAcceleration){ return baseAcceleration; })
+	explicit Rotator(float angularAccel, const std::function<float(float,Particle&,float)> &fader = [](float maximumLife, Particle &particle, float baseAcceleration){ return particle.angularVelocity; })
 		: angularAcceleration(angularAccel), fadeFunction(fader) {}
 	virtual ~Rotator() {}
 

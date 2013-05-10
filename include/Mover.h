@@ -10,10 +10,10 @@ class Mover : public ParticleManipulator
 {	
 private:
 	const glm::vec3 acceleration;
-	const std::function<glm::vec3(float,float,glm::vec3)> fadeFunction;
+	const std::function<glm::vec3(float,Particle&,const glm::vec3&)> fadeFunction;
 
 public:
-	explicit Mover(const glm::vec3 &accel, const std::function<glm::vec3(float,float,glm::vec3&)> &fader = [](float maximumLife, float currentLife, glm::vec3 &baseAcceleration){ return baseAcceleration; }) 
+	explicit Mover(const glm::vec3 &accel, const std::function<glm::vec3(float,Particle&, const glm::vec3&)> &fader = [](float maximumLife, Particle &particle, const glm::vec3 &baseAcceleration){ return particle.velocity; }) 
 		: acceleration(accel), fadeFunction(fader) {}
 	virtual ~Mover() {}
 
