@@ -1,10 +1,9 @@
 #include "Fader.h"
 
-void Fader::manipulate(std::vector<Particle> &particles, float tick)
+void Fader::manipulate(std::vector<Particle> &particles, float maximumLife)
 {
-	float scaledFadeAmount = fadeFunction(tick, fadeAmount);
 	for(Particle &p : particles)
 	{
-		p.opacity += scaledFadeAmount;
+			p.opacity = fadeFunction(maximumLife, p.lifeTime, fadeAmount);
 	}
 }

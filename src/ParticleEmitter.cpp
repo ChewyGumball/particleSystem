@@ -41,7 +41,7 @@ void ParticleEmitter::update(float tick)
 
 	for(auto &manipulator : manipulators)
 	{
-		manipulator->manipulate(particles, tick);
+		manipulator->manipulate(particles, maximumLifeTime);
 	}
 
 	for(Particle &particle : particles)

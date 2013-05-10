@@ -1,10 +1,9 @@
 #include "Rotator.h"
 
-void Rotator::manipulate(std::vector<Particle> &particles, float tick)
+void Rotator::manipulate(std::vector<Particle> &particles, float maximumLife)
 {
-	float scaledAcceleration = fadeFunction(tick, angularAcceleration);
 	for(Particle &p : particles)
 	{
-		p.angularVelocity += scaledAcceleration;
+		p.angularVelocity = fadeFunction(maximumLife, p.lifeTime, angularAcceleration);
 	}
 }

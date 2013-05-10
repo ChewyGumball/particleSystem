@@ -9,6 +9,6 @@ class ParticleManipulator
 public:
 	virtual ~ParticleManipulator() {}
 
-	virtual void manipulate(std::vector<Particle> &particles, float tick) = 0;
+	virtual void manipulate(std::vector<Particle> &particles, float maximumLife) = 0;
 };
 
