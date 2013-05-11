@@ -30,12 +30,23 @@ void ParticleEmitter::update(float tick)
 {
 	auto startOfDeleteRange = std::remove_if(begin(particles), end(particles), [&](Particle &p) { return p.lifeTime >= maximumLifeTime; });
 	particles.erase(startOfDeleteRange, end(particles));
-	
+
 	timeSinceLastEmit += tick;
 
-	if(emitting && particles.size() < maximumParticles && timeSinceLastEmit >= secondsPerParticle)
+	//Don't emit if there are already the maximum number of particles
+	if(particles.size() >= maximumParticles)
 	{
-		particles.push_back(generator->newParticle(position, orientation));
+		timeSinceLastEmit = 0.0f;
+	}
+
+	if(emitting && timeSinceLastEmit >= secondsPerParticle)
+	{
+		int newParticles = timeSinceLastEmit / secondsPerParticle;
+		while(newParticles > 0 && particles.size() < maximumParticles)
+		{
+			particles.push_back(generator->newParticle(position, orientation));
+			newParticles--;
+		}
 		timeSinceLastEmit = 0.0f;
 	}
 
