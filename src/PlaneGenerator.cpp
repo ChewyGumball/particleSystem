@@ -4,5 +4,6 @@
 
 Particle PlaneGenerator::newParticle(glm::vec3 &emmitterPosition, glm::quat &emmitterOrientation)
 {
-	return Particle(0, emmitterPosition, glm::vec3(1.0,0.0,0.0));
+	glm::vec3 direction = glm::normalize((randomDirection(randomEngine) * binormal) + (randomDirection(randomEngine) * tangent));
+	return Particle(0, emmitterPosition + glm::rotate(emmitterOrientation, direction * randomDistance(randomEngine)), glm::rotate(emmitterOrientation, normal));
 }

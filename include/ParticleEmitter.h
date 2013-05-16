@@ -22,7 +22,7 @@ private:
 
 	std::vector<Particle> particles;
 	std::vector<std::shared_ptr<ParticleManipulator>> manipulators;
-	std::unique_ptr<ParticleGenerator> generator;
+	std::shared_ptr<ParticleGenerator> generator;
 
 	glm::vec3 position;
 	glm::quat orientation;
@@ -32,8 +32,8 @@ private:
 
 public:
 
-	ParticleEmitter(std::unique_ptr<ParticleGenerator> gen, unsigned int maxParticles, int emitRate, float maximumLife, const glm::vec3 &pos = glm::vec3(), const glm::quat &orient = glm::quat())
-		: emitting(true), maximumParticles(maxParticles), secondsPerParticle(1.0f/static_cast<float>(emitRate)), maximumLifeTime(maximumLife), timeSinceLastEmit(0.0f), generator(std::move(gen)), position(pos), orientation(orient)
+	ParticleEmitter(std::shared_ptr<ParticleGenerator> gen, unsigned int maxParticles, int emitRate, float maximumLife, const glm::vec3 &pos = glm::vec3(), const glm::quat &orient = glm::quat())
+		: emitting(true), maximumParticles(maxParticles), secondsPerParticle(1.0f/static_cast<float>(emitRate)), maximumLifeTime(maximumLife), timeSinceLastEmit(0.0f), generator(gen), position(pos), orientation(orient)
 	{}
 	virtual ~ParticleEmitter() {}
 

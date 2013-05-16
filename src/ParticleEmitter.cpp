@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iterator>
 #include <iostream>
 
 #include "ParticleEmitter.h"
@@ -41,8 +42,8 @@ void ParticleEmitter::update(float tick)
 
 	if(emitting && timeSinceLastEmit >= secondsPerParticle)
 	{
-		int newParticles = timeSinceLastEmit / secondsPerParticle;
-		while(newParticles > 0 && particles.size() < maximumParticles)
+		unsigned int newParticles = std::min(static_cast<unsigned int>(timeSinceLastEmit / secondsPerParticle), maximumParticles - particles.size());
+		while(newParticles > 0)
 		{
 			particles.push_back(generator->newParticle(position, orientation));
 			newParticles--;
