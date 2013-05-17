@@ -4,6 +4,7 @@
 
 #include "ParticleManipulator.h"
 
+//Changes the angular velocity of particles
 class Rotator : public ParticleManipulator
 {	
 private:

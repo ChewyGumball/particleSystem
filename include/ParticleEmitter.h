@@ -40,7 +40,7 @@ public:
 	void startEmitting();
 	void stopEmitting();
 
-	int particlesAliveCount() const;
+	unsigned int particlesAliveCount() const;
 
 	void addManipulator(std::shared_ptr<ParticleManipulator> manipulator);
 

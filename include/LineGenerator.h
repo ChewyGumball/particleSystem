@@ -5,6 +5,7 @@
 
 #include "ParticleGenerator.h"
 
+//Generates particles from a point all going in the same direction
 class  LineGenerator : public ParticleGenerator
 {
 private:

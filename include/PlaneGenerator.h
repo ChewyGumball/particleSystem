@@ -2,12 +2,11 @@
 #include <random>
 
 #include <glm/gtc/quaternion.hpp>
-#include <glm/gtx/perpendicular.hpp>
 
 #include "ParticleGenerator.h"
 #include "GLMUtilities.h"
 
-
+//Generates particles randomly within a circle on a plane
 class  PlaneGenerator : public ParticleGenerator
 {
 private:

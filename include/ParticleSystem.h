@@ -15,11 +15,7 @@ public:
 
 	ParticleSystem() {}
 	~ParticleSystem() {}
-
-	ParticleSystem(ParticleSystem &other);
-	ParticleSystem(ParticleSystem &&other);
-	ParticleSystem& operator=(ParticleSystem rhs);
-
+	
 	void addEmitter(ParticleEmitter *emitter);
 
 	void update(float tick);

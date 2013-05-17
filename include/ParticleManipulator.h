@@ -4,6 +4,7 @@
 
 #include "Particle.h"
 
+//The abstract base class for manipulators
 class ParticleManipulator
 {
 public:

@@ -6,6 +6,7 @@
 
 #include "ParticleManipulator.h"
 
+//Changes the velocity of particles
 class Mover : public ParticleManipulator
 {	
 private:

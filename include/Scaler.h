@@ -4,6 +4,7 @@
 
 #include "ParticleManipulator.h"
 
+//Changes the scale of particles
 class Scaler : public ParticleManipulator
 {	
 private:

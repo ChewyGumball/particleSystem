@@ -2,7 +2,8 @@
 
 #include "Particle.h"
 
-class  ParticleGenerator
+//The abstract base class for particle generators
+class ParticleGenerator
 {
 public:
 	virtual ~ParticleGenerator() {}

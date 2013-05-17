@@ -4,6 +4,7 @@
 
 #include "ParticleManipulator.h"
 
+//Changes the opacity of particles
 class  Fader : public ParticleManipulator
 {	
 private:

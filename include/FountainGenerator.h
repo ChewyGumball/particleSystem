@@ -6,6 +6,7 @@
 #include "ParticleGenerator.h"
 #include "GLMUtilities.h"
 
+//Generates particles from a point in a cone
 class  FountainGenerator : public ParticleGenerator
 {
 private:
@@ -13,6 +14,7 @@ private:
 	glm::vec3 direction;
 	glm::vec3 binormal;
 	
+	//Used for random angle within the cone
 	std::default_random_engine randomEngine;
 	std::uniform_real_distribution<float> randomDeviation;
 
