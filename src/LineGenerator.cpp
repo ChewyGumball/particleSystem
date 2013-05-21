@@ -2,9 +2,9 @@
 
 #include "LineGenerator.h"
 
-Particle LineGenerator::newParticle(glm::vec3 &emmitterPosition, glm::quat &emmitterOrientation)
+Particle LineGenerator::newParticle(unsigned int label, glm::vec3 &emmitterPosition, glm::quat &emmitterOrientation)
 {
-	return Particle(0, 
+	return Particle(label, 
 					emmitterPosition + glm::rotate(emmitterOrientation, position), 
 					glm::rotate(emmitterOrientation, direction));
 }

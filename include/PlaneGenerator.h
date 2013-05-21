@@ -27,5 +27,5 @@ public:
 	{}
 	virtual ~PlaneGenerator() {}
 
-	virtual Particle newParticle(glm::vec3 &emmitterPosition, glm::quat &emmitterOrientation);
+	virtual Particle newParticle(unsigned int label, glm::vec3 &emmitterPosition, glm::quat &emmitterOrientation);
 };

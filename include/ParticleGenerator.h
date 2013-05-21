@@ -8,5 +8,5 @@ class ParticleGenerator
 public:
 	virtual ~ParticleGenerator() {}
 
-	virtual Particle newParticle(glm::vec3 &emmitterPosition, glm::quat &emmitterOrientation) = 0;
+	virtual Particle newParticle(unsigned int label, glm::vec3 &emmitterPosition, glm::quat &emmitterOrientation) = 0;
 };

@@ -43,7 +43,7 @@ void ParticleEmitter::update(float tick)
 		//Have the generator create the new particles
 		while(newParticles > 0)
 		{
-			particles.push_back(generator->newParticle(position, orientation));
+			particles.push_back(generator->newParticle(particleLabel, position, orientation));
 			newParticles--;
 		}
 		//Reset timer
