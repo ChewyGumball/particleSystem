@@ -4,9 +4,9 @@
 #include "ParticleEmitter.h"
 #include "ParticleGenerator.h"
 
-void ParticleEmitter::startEmitting() {	emitting = false; }
+void ParticleEmitter::startEmitting() {	emitting = true; }
 
-void ParticleEmitter::stopEmitting() { emitting = true; }
+void ParticleEmitter::stopEmitting() { emitting = false; }
 
 unsigned int ParticleEmitter::particlesAliveCount() const { return particles.size(); }
 
